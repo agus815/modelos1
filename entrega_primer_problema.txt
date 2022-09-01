@@ -1,0 +1,10 @@
+Impresión del problema:
+En la consigna me dan un lavarropas en la cual se puede lavar varias prendas a la vez, donde algunas prendas no se pueden lavar juntas y el tiempo de cada lavado es el tiempo que tarda en lavarse la ropa más sucia (la que más tarda en lavarse). Como se quiere minimizar el costo (tiempo de lavado), a primera vista tengo que determinar la cantidad de lavados y qué prendas lavar en cada lavado. Para agrupar las distintas prendas se puede hacer un algoritmo sencillo, pero con los conocimientos que actualmente poseo no tengo manera de determinar si la solución es la óptima.
+
+
+Resolución:
+Suponiendo que el lavarropas funciona correctamente y se ignoran los tiempos entre cada lavado, el tiempo total que tarda en lavarse las prendas es:
+z = t1 + t2 + t3 + ... + tn
+Donde cada ti es el tiempo que tarda el lavado i.
+Tengo que minimizar z, lo cual tengo que minimizar n (cantidad de lavados) y ti (el tiempo que tarda cada lavado).
+Para minimizar la cantidad de lavados, conviene lavar de a varias prendas a la vez, lo cual pruebo primero agrupar las prendas compatibles entre si y "lavarlas" juntas. 
