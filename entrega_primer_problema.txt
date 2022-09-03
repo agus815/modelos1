@@ -7,4 +7,51 @@ Suponiendo que el lavarropas funciona correctamente y se ignoran los tiempos ent
 z = t1 + t2 + t3 + ... + tn
 Donde cada ti es el tiempo que tarda el lavado i.
 Tengo que minimizar z, lo cual tengo que minimizar n (cantidad de lavados) y ti (el tiempo que tarda cada lavado).
-Para minimizar la cantidad de lavados, conviene lavar de a varias prendas a la vez, lo cual pruebo primero agrupar las prendas compatibles entre si y "lavarlas" juntas. 
+
+Solución 1:
+Para minimizar la cantidad de lavados, conviene lavar de a varias prendas a la vez, lo cual pruebo primero agrupar las prendas compatibles entre si y lavarlas juntas. El algoritmo propuesto es el siguiente:
+- De las prendas que no se lavaron aún, tomar una y colocarlo en el lavarropas.
+- De las prendas que son compatibles con las que estan en el lavarropas y no se lavaron aún, tomar una y colocarlo en el lavarropas
+- (Repetir el paso de arriba hasta no haber más prendas compatibles)
+- Realizar el lavado
+- De las prendas restantes, tomar una y colocarlo en el lavarropas
+- (Repetir hasta que no quede ninguna prenda)
+Los resultados son:
+Lavado 1: [1, 11]
+Lavado 2: [2, 12, 17]
+Lavado 3: [3, 9, 20]
+Lavado 4: [4, 10]
+Lavado 5: [5, 15, 18]
+Lavado 6: [6, 16, 19]
+Lavado 7: [7, 13]
+Lavado 8: [8, 14]
+Y el tiempo total me dio 61.
+Observando los resultados, veo que si bien las prendas se agrupan segun la compatibilidad, hay lavados donde se juntan prendas que tardan poco y prendas que tardan mucho. Por lo tanto, se me ocurrió plantear una resolución que separe las prendas que tarden mucho con las prendas que tarden poco, para asi reducir el tiempo de cada lavado individual.
+
+Solución 2:
+Para saparar las prendas que tardan poco de las que tardan mucho, modifiqué el algoritmo anterior para que en lugar de agarrar el próximo en la lista de prendas, agarrar la que más tarda. De la misma manera, cuando se quiere agregar más prendas en el lavarropas se agarra siempre la que más tarda.
+Los resultados son:
+Lavado 1: [2, 17, 12]
+Lavado 2: [7, 9, 19]
+Lavado 3: [3, 16, 18]
+Lavado 4: [6, 10]
+Lavado 5: [1, 11]
+Lavado 6: [4, 15]
+Lavado 7: [13, 8]
+Lavado 8: [20, 5]
+Lavado 9: [14]
+Y el tiempo total me dio 64.
+Como se puede observar, con el algoritmo modificado el tiempo cuesta más debido a que se tiene que realizar mas lavados, lo cual me quedo con la primera solucion.
+
+Comparación de los dos resultados:
+	Solución 1:
+	- El algoritmo es sencillo (y casi trivial)
+	- Agrupa más prendas por lavado en promedio
+	- Agrupa prendas cuyos costos varían
+	Solución 2:
+	- El algoritmo es más complejo
+	- El tiempo promedio de cada lavado es menor
+	- Realiza más lavados
+
+Comentarios finales:
+A partir de los resultados se puede concluir que la cantidad de lavados tiene mayor peso que el tiempo promedio de cada lavado, pero es dificil buscar un algoritmo que pueda reducir el tiempo de cada lavado individual mantienendo la misma cantidad de lavados que la primera solución.
