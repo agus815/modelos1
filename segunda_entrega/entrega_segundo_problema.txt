@@ -1,0 +1,62 @@
+Impresión del problema:
+La consigna del segundo problema es igual al primero, con la diferencia de que esta vez hay muchas más prendas. Por otra parte, hay prendas que no son mutuamente incompatibles entre sí (1 es incompatible con 2, pero 2 no lo es con 1), por lo tanto hay que tenerlas en cuenta cuando se arma la tabla de incompatibilidades.
+
+
+Resolución:
+Dado que la consigna es igual a la primera, el plateo del problema será igual:
+Suponiendo que el lavarropas funciona correctamente y se ignoran los tiempos entre cada lavado, el tiempo total que tarda en lavarse las prendas es:
+z = t1 + t2 + t3 + ... + tn
+Donde cada ti es el tiempo que tarda el lavado i.
+Tengo que minimizar z, lo cual tengo que minimizar n (cantidad de lavados) y ti (el tiempo que tarda cada lavado).
+
+Solución 1:
+Para obtener una solucion inicial, propongo aplicar de nuevo el algoritmo que mejor resulto en la primera entrega.
+El algoritmo era el siguiente:
+- De las prendas que no se lavaron aún, tomar una y colocarlo en el lavarropas.
+- De las prendas que son compatibles con las que están en el lavarropas y no se lavaron aún, tomar una y colocarla en el lavarropas
+- (Repetir el paso de arriba hasta no haber más prendas compatibles)
+- Realizar el lavado
+- De las prendas restantes, tomar una y colocarla en el lavarropas
+- (Repetir hasta que no quede ninguna prenda)
+Y el tiempo total dio 755, realizando 42 lavados.
+Observando los resultados, veo que el tiempo tardado es mucho mayor a lo esperado. Probablemente este algoritmo haya funcionado en la primera entrega debido a un factor de aleatoriedad.
+
+Solución 2:
+Para esta solucion, propongo utilizar nuevamente la segunda solucion propuesta en la entrega anterior, que parece ajustarse mejor al caso de más prendas.
+La solucion era similar al anterior, solo que cada vez que se tomaba una nueva prenda se tomaba la que más tardaba, para asi asegurar que las de mayor tiempo de lavado se laven juntas y las prendas que se tenian que lavar solas al final iban a ser las que menos tardaban.
+El algoritmo era el siguiente:
+- De las prendas que aún no fueron lavadas, tomar la que más tarda
+- De las prendas que son compatibles con la primera, tomar la que más tarda y colocarla en el lavarropas
+- De las prendas que son compatibles con las que se colocaron en el lavarropas, tomar la que más tarda y colocarla en el lavarropas
+- Repetir hasta que no haya más prendas compatibles e iniciar el lavado
+- Repetir los pasos de arriba hasta no haber más prendas
+Y el tiempo total me dio 493, realizando 40 lavados.
+Se puede observar que este metodo cuesta menos tiempo debido a que las prendas son agrupadas de una manera más razonable, tal como se esperaba.
+
+Solucion 3:
+En esta solucion se propone mejorar un poco el algoritmo propuesto en la solucion anterior. También se tomará la prenda que más tarda, pero si hay más de una prenda que cuestan lo mismo, entonces se tomara la que más incompatibilidades tiene. Se espera que asi se logre una menor cantidad de lavados, resultando en un costo total menor.
+El algoritmo es asi:
+- De las prendas que aún no fueron lavadas, tomar la que más tarda. Si hay dos que tardan lo mismo, tomar la que más incompatibilidades tiene
+- De las prendas que son compatibles con la primera, tomar la que más tarda y más incompatibilidades tiene, luego colocarla en el lavarropas
+- De las prendas que son compatibles con las que se colocaron en el lavarropas, tomar la que más tarda y más incompatibilidades tiene, y colocarla en el lavarropas
+- Repetir hasta que no haya más prendas compatibles e iniciar el lavado
+- Repetir los pasos de arriba hasta no haber más prendas
+Y el tiempo total me dio 476, realizando 38 lavados.
+Tal como se esperaba, se realizaron menos lavados y se logró asi un menor costo.
+
+Comparación de los resultados:
+	Solución 1:
+	- El algoritmo es sencillo
+	- Depende fuertemente de los datos dados
+	- Realiza más lavados y cuesta más
+	Solución 2:
+	- El algoritmo es un poco más complejo
+	- El tiempo promedio de cada lavado es menor
+	- Realiza menos lavados
+	Solución 3:
+    - El algoritmo es más complejo
+   	- El tiempo promedio es similar a la segunda solucion
+    - Realiza menos lavados que la seguda solucion
+
+Comentarios finales:
+Para esta solucion segui la misma logica que la solucion anterior, aplicando una tecnica similar a la de coloracion de grafos. Sin embargo, sigo sin poder encontrar la solucion óptima debido a la falta de conocimientos sobre la materia.
