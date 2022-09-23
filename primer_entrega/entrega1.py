@@ -3,7 +3,7 @@ def importar():
 	incompatibles = {}
 	tiempo_individual = {}
 
-	f = open("problema1.py", "r")
+	f = open("problema1.txt", "r")
 	for linea in f:
 		linea_split = linea.split()
 		if linea_split[0] == "p":
