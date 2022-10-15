@@ -1,0 +1,47 @@
+Impresion del problema:
+La consigna es igual a los problemas anteriores, y los datos dados son iguales a la primera. Se tiene 20 prendas y hay que distribuirlos en distintos lavados teniendo en cuenta las incompatibilidades que existen.
+Con los conceptos aprendidos en clase, puedo plantear un modelo para optimizar la solucion. El mayor problema aqui es que no se puede conocer de antemano cuantos lavados se realizaran. Se propone poner la maxima cantidad de lavados posibles, y en caso de declarar más lavados de lo que se necesita, el modelo no asignara ninguna prenda al lavado.
+
+Analisis:
+Se tiene una cantidad determinada de prendas, donde cada prenda cuesta un tiempo determinado en lavarse (Xi). Hay algunas que no se pueden lavar con otras, y es necesario lavar todas las prendas. Se desea que tarde la menor cantidad de tiempo posible, sabiendo que el tiempo de cada lavado es igual a la prenda que mayor tarda en el correspondiente lavado.
+
+Objetivo:
+Determinar la cantidad de lavados y las prendas que se lavan en cada lavado para minimizar el costo de tiempo total.
+
+Hipotesis y supuestos:
+- El lavarropas funciona correctamente
+- El tiempo entre lavados es despreciable
+- No hay límite en la cantidad de prendas que se lava en cada lavado
+- No hay límite en la cantidad de lavados (por la naturaleza del problema, la maxima cantidad de lavados posible es 20)
+- No hay límite en el tiempo de funcionamiento del lavarropas
+- Todas las prendas deben lavarse
+
+Variables:
+- Ii: Tiempo que inicia el lavado i, i = [1, ..., 20]
+- Fi: Tiempo que finaliza el lavado i, i = [1, ..., 20]
+- Ti: Tiempo que tarda el lavado i, i = [1, ..., 20]
+- T_FINAL: Tiempo total en realizar todos los lavados
+- YLij: 1 si se realiza el lavado i antes que j          i, j = [1, .., 20]; i != j
+        0 si no
+- YPij: 1 si en el lavado i se lava la prenda j          i, j = [1, .., 20]
+        0 si no
+- Xi: Tiempo que tarda la prenda en lavarse, i = [1, ..., 20]
+
+Restricciones:
+- REL_INI_FIN: Fi = Ii + Ti,                 para todo i = [1, ..., 20]
+- FIN: T_FINAL >= Fi,                        para todo i = [1, ..., 20]
+- EVITAR_SUPERPOS: M * YLij + Ij >= Fi       para todo i, j = [1, ..., 20]; i != j
+                   M * YLji + Ii >= Fj
+                   YLij + YLji = 1
+- INCOMP: YPia + YPib <= 1                   para todo i = [1, ..., 20]; a incompatible con b
+- LAVADO_UNICO: sumatoria_i(YPij) = 1        con i del 1 al 20, para todo j = [1, ..., 20]
+- TIEMPO_LAVADO: Ti >= YPij * Xj             para todo J = [1, ..., 20], para todo i = [1, ..., 20]
+
+Funcion Objetivo:
+min z: T_FINAL
+
+(El problema se encuentra planteado en el archivo "problema3.mod", con el codigo para generarlo en el archivo "entrega3.py")
+
+Comentarios finales:
+Si bien no pude obtener los resultados concretos debido a que existen muchas variables bivalentes y tarda mucho tiempo en correrse, el resultado debe ser igual o mejor que aquellos que se obtuvieron con los algoritmos planteados en las entregas anteriores.
+La ventaja de utilizar este modelo es que se puede asegurar que el resultado obtenido será el óptimo, pero la desventaja es que su cómputo consume mucho tiempo.
