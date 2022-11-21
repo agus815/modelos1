@@ -1,0 +1,1 @@
+solution: 119 /size: 138 /time: 7828.609
